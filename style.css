@@ -1,0 +1,629 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --border-color: rgba(255, 255, 255, 0.08);
+  --bg-color: #030303;
+  --panel-bg: rgba(255, 255, 255, 0.02);
+  --text-main: #f5f5f7;
+  --text-muted: #a1a1a6;
+  --apple-ease: cubic-bezier(0.25, 1, 0.5, 1);
+  --apple-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: hidden; /* Prevent scrolling */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Overall Layout Grid */
+.app-layout {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 350px 1fr 350px;
+  grid-template-rows: 80px 1fr 1fr;
+  perspective: 1000px; /* 3D effect container */
+}
+
+/* Column Borders */
+.app-layout > div {
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: var(--panel-bg);
+  transition: background 0.5s var(--apple-ease);
+}
+
+.app-layout > div:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ------------- TOP NAVIGATION ------------- */
+.nav-left {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  flex-direction: row !important;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  animation: fadeInDown 1s var(--apple-ease) forwards;
+  opacity: 0;
+}
+
+.nav-center {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  animation: fadeInDown 1s var(--apple-ease) 0.1s forwards;
+  opacity: 0;
+}
+
+.nav-right {
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+  flex-direction: row !important;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  animation: fadeInDown 1s var(--apple-ease) 0.2s forwards;
+  opacity: 0;
+}
+
+.nav-left .flex-row, .nav-right .flex-row {
+  transition: transform 0.3s var(--apple-spring), color 0.3s ease;
+}
+
+.nav-left .flex-row:hover, .nav-right .flex-row:hover {
+  transform: scale(1.05);
+  color: #fff;
+}
+
+/* ------------- LEFT PANEL ------------- */
+.panel-left-top {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  padding: 40px 30px;
+  justify-content: center;
+  animation: fadeInLeft 1s var(--apple-ease) 0.3s forwards;
+  opacity: 0;
+}
+
+.panel-left-top h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.panel-left-bottom {
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
+  padding: 40px 30px;
+  justify-content: flex-end; 
+  animation: fadeInLeft 1s var(--apple-ease) 0.4s forwards;
+  opacity: 0;
+}
+
+.panel-left-bottom p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  max-width: 250px;
+  font-weight: 300;
+}
+
+.panel-left-bottom p strong {
+  color: var(--text-main);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.btn-discover {
+  display: inline-block;
+  padding: 14px 28px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.4s var(--apple-ease);
+  align-self: flex-start;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-discover:hover {
+  background: #ffffff;
+  color: #000000;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+}
+
+.btn-discover:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.socials {
+  display: flex;
+  gap: 15px;
+  margin-top: auto;
+}
+
+.socials svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.3s var(--apple-spring);
+}
+
+.socials svg:hover {
+  stroke: var(--text-main);
+  transform: translateY(-3px) scale(1.1);
+}
+
+/* ------------- CENTER PANEL ------------- */
+.panel-center {
+  grid-column: 2 / 3;
+  grid-row: 2 / 4;
+  padding: 0;
+  position: relative;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, transparent 70%);
+  animation: scaleIn 1.2s var(--apple-ease) forwards;
+  opacity: 0;
+  overflow: hidden;
+}
+
+spline-viewer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: transparent;
+  transition: transform 0.1s ease-out; /* For JS Mouse Parallax */
+}
+
+/* Glow effect behind robot */
+.panel-center::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90vh;
+  height: 90vh;
+  margin-top: -45vh;
+  margin-left: -45vh;
+  background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 60%);
+  filter: blur(50px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Refined crosshair */
+.crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  border: 1px dashed rgba(255,255,255,0.05);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  transition: transform 1s var(--apple-ease);
+}
+
+/* ------------- RIGHT PANEL ------------- */
+.panel-right-top {
+  grid-column: 3 / 4;
+  grid-row: 2 / 3;
+  padding: 40px 30px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  animation: fadeInRight 1s var(--apple-ease) 0.5s forwards;
+  opacity: 0;
+}
+
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  align-items: flex-end; /* Align to the right edge */
+}
+
+.side-nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.4s var(--apple-ease);
+  position: relative;
+  opacity: 0.7;
+}
+
+.side-nav a::after {
+  content: '';
+  position: absolute;
+  right: -15px; /* Tiny indicator dot to the right */
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  width: 4px;
+  height: 4px;
+  background: var(--text-main);
+  border-radius: 50%;
+  transition: transform 0.4s var(--apple-spring);
+}
+
+.side-nav a:hover, .side-nav a.active {
+  color: var(--text-main);
+  opacity: 1;
+  transform: translateX(-5px); /* Slide left slightly on hover */
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.side-nav a:hover::after, .side-nav a.active::after {
+  transform: translateY(-50%) scale(1);
+}
+
+.panel-right-bottom {
+  grid-column: 3 / 4;
+  grid-row: 3 / 4;
+  padding: 40px 30px;
+  justify-content: center;
+  align-items: flex-end;
+  text-align: right;
+  animation: fadeInRight 1s var(--apple-ease) 0.6s forwards;
+  opacity: 0;
+}
+
+.panel-right-bottom h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  margin-bottom: 15px;
+  background: linear-gradient(90deg, #fff, #888);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.panel-right-bottom p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  font-weight: 300;
+}
+
+.socials-right {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  justify-content: flex-end;
+}
+
+.socials-right svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.3s var(--apple-spring);
+}
+
+.socials-right svg:hover {
+  stroke: var(--text-main);
+  transform: translateY(-3px) scale(1.1);
+}
+
+.action-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  width: max-content;
+}
+
+.action-icon {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s var(--apple-spring);
+  background: rgba(255,255,255,0.02);
+}
+
+.action-row:hover .action-icon {
+  background: #fff;
+  color: #000;
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+}
+
+.action-row:hover .action-icon svg {
+  stroke: #000;
+}
+
+.action-row span {
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.85rem;
+  transition: color 0.3s ease;
+}
+
+.action-row:hover span {
+  color: #fff;
+}
+
+.page-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.25rem;
+  color: rgba(255,255,255,0.3);
+  font-weight: 300;
+}
+.page-indicator span {
+  color: #fff;
+  font-weight: 400;
+}
+
+/* Generic Utilities */
+.flex-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Tech circuit vines styling */
+.tech-vine {
+  position: absolute;
+  left: -20px;
+  width: 180px;
+  height: 180px;
+  pointer-events: none;
+  z-index: 0;
+  color: var(--text-main);
+  animation: svgGlow 4s infinite alternate;
+  opacity: 0.8;
+}
+
+.top-left-vine {
+  top: 0px;
+}
+
+.bottom-left-vine {
+  top: 10px;
+}
+
+.top-right-vine {
+  top: 0px;
+  left: auto;
+  right: -20px;
+  transform: scaleX(-1);
+}
+
+.bottom-right-vine {
+  top: 10px;
+  left: auto;
+  right: -20px;
+  transform: scaleX(-1);
+}
+
+@keyframes svgGlow {
+  0% { filter: drop-shadow(0 0 2px rgba(255,255,255,0.1)); }
+  100% { filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); }
+}
+
+/* ------------- ABOUT PAGE COMPONENT ------------- */
+.about-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  max-width: 650px;
+  background: rgba(10, 10, 12, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  z-index: 10;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.05);
+  animation: slideUpFloat 1.2s var(--apple-spring) forwards;
+  opacity: 0;
+  color: var(--text-main);
+  transition: transform 0.3s ease; /* Hooked to JS parallax if needed */
+}
+
+@keyframes slideUpFloat {
+  0% { opacity: 0; transform: translate(-50%, -40%) scale(0.95); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.about-card h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #fff, #a1a1a6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+.about-lead {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  font-weight: 500;
+  margin-bottom: 25px;
+  color: #fff;
+}
+
+.about-body p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 15px;
+  font-weight: 300;
+}
+
+.traits-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 35px;
+}
+
+.trait-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.4s var(--apple-spring);
+  color: #e5e5ea;
+}
+
+.trait-badge svg {
+  width: 18px;
+  height: 18px;
+  stroke: #8e8e93;
+  transition: stroke 0.3s ease;
+}
+
+.trait-badge:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px) scale(1.02);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  color: #fff;
+}
+
+.trait-badge:hover svg {
+  stroke: #fff;
+}
+
+/* ------------- ABOUT PAGE GLOW ORBS ------------- */
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  z-index: 0;
+  pointer-events: none;
+  animation: floatOrb 12s infinite alternate var(--apple-spring);
+}
+
+.orb-1 {
+  width: 45vh; 
+  height: 45vh;
+  top: 15%; 
+  left: 20%;
+  background: rgba(140, 60, 255, 0.2); /* Soft Purple */
+}
+
+.orb-2 {
+  width: 55vh; 
+  height: 55vh;
+  bottom: 15%; 
+  right: 20%;
+  background: rgba(0, 160, 255, 0.15); /* Soft Blue */
+  animation-delay: -5s;
+}
+
+.orb-3 {
+  width: 40vh; 
+  height: 40vh;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.08); /* Center White Highlight */
+  animation-delay: -10s;
+}
+
+@keyframes floatOrb {
+  0% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.1) translate(30px, -30px); }
+  100% { transform: scale(0.95) translate(-20px, 40px); }
+}
