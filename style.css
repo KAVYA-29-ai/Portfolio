@@ -66,6 +66,20 @@ body, html {
   perspective: 1500px;
   background: var(--bg-color);
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.8s var(--apple-ease), transform 0.8s var(--apple-ease);
+}
+
+body.loaded .app-layout {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-out {
+  opacity: 0 !important;
+  transform: translateY(-10px) !important;
+  transition: opacity 0.5s var(--apple-ease), transform 0.5s var(--apple-ease) !important;
 }
 
 /* Nebula Background Effect - Monochromatic */
