@@ -55,25 +55,6 @@ body, html {
   to { opacity: 1; transform: scale(1); }
 }
 
-@keyframes pageFadeIn {
-  from { opacity: 0; filter: blur(10px); }
-  to { opacity: 1; filter: blur(0); }
-}
-
-@keyframes pageFadeOut {
-  from { opacity: 1; filter: blur(0); }
-  to { opacity: 0; filter: blur(10px); }
-}
-
-.page-transitioning {
-  animation: pageFadeOut 0.5s var(--apple-ease) forwards !important;
-}
-
-body {
-  opacity: 0;
-  animation: pageFadeIn 0.8s var(--apple-ease) forwards;
-}
-
 /* Overall Layout Grid */
 .app-layout {
   position: relative;
@@ -292,7 +273,7 @@ spline-viewer {
   z-index: 1;
   background: transparent;
   transition: transform 0.1s ease-out; /* For JS Mouse Parallax */
-  /* filter: grayscale(1); Removed for premium look */
+  filter: grayscale(1);
 }
 
 /* Glow effect behind robot */
@@ -381,11 +362,6 @@ spline-viewer {
 
 .side-nav a:hover::after, .side-nav a.active::after {
   transform: translateY(-50%) scale(1);
-}
-
-/* Fluid button transitions */
-.btn-discover, .prime-btn, .btn-view {
-  transition: all 0.5s var(--apple-spring) !important;
 }
 
 .panel-right-bottom {
@@ -811,8 +787,6 @@ spline-viewer {
   align-items: center;
   justify-content: center;
   perspective: 1500px;
-  animation: slideUpFloat 1.2s var(--apple-spring) forwards;
-  opacity: 0;
 }
 
 .carousel-section h3 {
