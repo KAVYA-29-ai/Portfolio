@@ -43,8 +43,31 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Add entry animation hooks if needed
+    // Add entry animation hooks
     setTimeout(() => {
         document.body.classList.add('loaded');
     }, 100);
+
+    // Smooth Page Transition Out
+    const links = document.querySelectorAll('a');
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+
+            // Skip if it's an external link, a hash link, or mailto
+            if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto') || link.target === '_blank') {
+                return;
+            }
+
+            e.preventDefault();
+            const appLayout = document.querySelector('.app-layout');
+            if (appLayout) {
+                appLayout.classList.add('fade-out');
+            }
+
+            setTimeout(() => {
+                window.location.href = href;
+            }, 500); // Wait for transition out
+        });
+    });
 });
